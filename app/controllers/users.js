@@ -1,22 +1,50 @@
-"use strict"
+"use strict";
 
 module.exports = {
-    mid1,
-    mid2,
-    mid3
+  createUser,
+  getUsers,
+  getUserById,
+  deleteUser,
+};
+
+const User = require("../models/users");
+
+function getUsers(req, res, next) {
+  User.find(function (err, result) {
+    if (err) {
+      return res.status(404).json(err);
+    }
+    return res.json(result);
+  });
 }
 
-function mid1 (req, res, next) {
-    console.log('hello GET mid1')
-    next();
+function getUserById(req, res, next) {
+  const { _id } = req.params;
+  User.findById({ _id }, function (err, result) {
+    if (err) {
+      return res.status(404).json(err);
+    }
+    return res.json(result);
+  });
 }
 
-function mid2 (req, res, next) {
-    console.log('hello GET mid2')
-    next();
+function createUser(req, res, next) {
+  const user = new User(req.body);
+
+  user.save(function (err, result) {
+    if (err) {
+      return res.status(404).json(err);
+    }
+    return res.json(result);
+  });
 }
 
-function mid3 (req, res, next) {
-    res.json({text: 'mid 3'})
-    next();
+function deleteUser(req, res, next) {
+  const { _id } = req.params;
+  User.deleteOne({ _id }, function (err, result) {
+    if (err) {
+      return res.status(404).json(err);
+    }
+    return res.json(result);
+  });
 }

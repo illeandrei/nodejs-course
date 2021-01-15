@@ -1,14 +1,15 @@
-"use strict"
+"use strict";
 
 const express = require("express");
 const app = express();
-const config = require('./config')
-const helperCtrl = require('./app/helpers')
+const config = require("./config");
+const helperCtrl = require("./app/helpers");
 
 //require order is important
-require('./config/express').initExpress(app);
-require('./config/routes').initRoutes(app);
+require("./config/express").initExpress(app);
+require("./config/mongoose").initMongoose();
+require("./config/routes").initRoutes(app);
 
 app.listen(config.PORT, function () {
-    console.log(`App is running on port  ${config.PORT}`);
-})
+  console.log(`App is running on port  ${config.PORT}`);
+});
