@@ -29,9 +29,11 @@ router.delete(
 
 router.post("/users", userCtrl.createUser, helperCtrl.responseToJson("users"));
 
-router.put("/users", authorizationCtrl.checkAdmin, function (req, res, next) {
-  console.log("users route PUT");
-  res.json({ text: "hello PUT" });
-});
+router.put(
+  "/users/:_id",
+  userCtrl.getUserById,
+  userCtrl.updateUser,
+  helperCtrl.responseToJson("users")
+);
 
 module.exports = router;
