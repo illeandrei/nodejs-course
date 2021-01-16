@@ -1,9 +1,11 @@
-"user strict"
+"user strict";
 
 module.exports = {
-    getCurrentDate: getCurrentDate
-}
+  responseToJson,
+};
 
-function getCurrentDate() {
-    return new Date();
+function responseToJson(propsItem) {
+  return function (req, res, next) {
+    res.json(req.resources[propsItem]);
+  };
 }

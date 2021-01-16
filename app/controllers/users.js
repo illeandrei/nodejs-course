@@ -5,6 +5,7 @@ module.exports = {
   getUsers,
   getUserById,
   deleteUser,
+  responseToJson,
 };
 
 const User = require("../models/users");
@@ -14,7 +15,8 @@ function getUsers(req, res, next) {
     if (err) {
       return res.status(404).json(err);
     }
-    return res.json(result);
+    req.resources.users = result;
+    return next();
   });
 }
 
@@ -24,7 +26,8 @@ function getUserById(req, res, next) {
     if (err) {
       return res.status(404).json(err);
     }
-    return res.json(result);
+    req.resources.users = result;
+    return next();
   });
 }
 
@@ -35,7 +38,8 @@ function createUser(req, res, next) {
     if (err) {
       return res.status(404).json(err);
     }
-    return res.json(result);
+    req.resources.users = result;
+    return next();
   });
 }
 
@@ -45,6 +49,6 @@ function deleteUser(req, res, next) {
     if (err) {
       return res.status(404).json(err);
     }
-    return res.json(result);
+    return next();
   });
 }
