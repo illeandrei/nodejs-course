@@ -5,7 +5,6 @@ module.exports = {
   getUsers,
   getUserById,
   deleteUser,
-  responseToJson,
 };
 
 const User = require("../models/users");
