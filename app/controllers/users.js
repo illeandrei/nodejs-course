@@ -36,7 +36,7 @@ function createUser(req, res, next) {
 
   user.save(function (err, result) {
     if (err) {
-      return res.status(404).json(err);
+      return next(err);
     }
     req.resources.users = result;
     return next();
