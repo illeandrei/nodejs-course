@@ -28,6 +28,16 @@ const storySchema = new Schema(
       type: String,
       required: false,
     },
+    reviews: [
+      {
+        description: {
+          type: String,
+        },
+        rating: {
+          type: Number,
+        },
+      },
+    ],
   },
   {
     timestamps: { currentTime: () => new Date().getTime() },
